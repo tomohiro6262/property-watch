@@ -28,11 +28,18 @@ def prune():
             f.unlink()
 
 
+STEPS = {
+    "collect": collect_suumo.main,  # 8〜10 分
+    "screen": screen.main,          # 新着の詳細・通勤時間・ハザードの取得で数分
+    "digest": make_digest.main,
+    "prune": prune,
+}
+
+
 def main():
-    collect_suumo.main()
-    screen.main()
-    make_digest.main()
-    prune()
+    """引数なしなら全工程。`python run_daily.py collect` のように工程を指定して分割実行もできる。"""
+    for name in sys.argv[1:] or STEPS:
+        STEPS[name]()
 
 
 if __name__ == "__main__":
