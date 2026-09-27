@@ -1,0 +1,4 @@
+__pycache__/
+*.log
+# data/ はルーチンが claude/property-data ブランチに保存する（main には含めない）
+data/
